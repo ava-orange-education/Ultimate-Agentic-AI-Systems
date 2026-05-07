@@ -33,7 +33,7 @@ chapter_2/
 ├── stage-1-raw-loop/
 │   ├── __init__.py
 │   └── raw_loop.py          # ~30-line perception–action loop, no framework
-└── stage-2-adk-agent/
+└── workshop_agent/
     ├── __init__.py
     └── agent.py             # Same agent rewritten with Google ADK
 ```
@@ -78,7 +78,7 @@ The third command makes two weather tool calls and one arithmetic call, all chos
 
 ## Stage 2 — ADK Agent
 
-`stage-2-adk-agent/agent.py` rewrites the same agent using `google-adk`. The behaviour is identical; the code is shorter and more declarative. The `eval`-based calculator is replaced with three typed primitives (`add`, `subtract`, `multiply`) and the weather function returns a structured dict.
+`workshop_agent/agent.py` rewrites the same agent using `google-adk`. The behaviour is identical; the code is shorter and more declarative. The `eval`-based calculator is replaced with three typed primitives (`add`, `subtract`, `multiply`) and the weather function returns a structured dict.
 
 ### Tools
 
@@ -96,11 +96,11 @@ The third command makes two weather tool calls and one arithmetic call, all chos
 adk web .
 ```
 
-Open [http://localhost:8000](http://localhost:8000), pick `stage-2-adk-agent` from the dropdown, and ask the same questions. The right-hand panel shows every reasoning step, tool call, and tool response.
+Open [http://localhost:8000](http://localhost:8000), pick `workshop_agent` from the dropdown, and ask the same questions. The right-hand panel shows every reasoning step, tool call, and tool response.
 
 ### Experiment with the instruction string
 
-Open `stage-2-adk-agent/agent.py`, change the `instruction` field, save, and rerun `adk web .`. The agent's tone and behaviour will shift immediately — the system prompt is the policy layer.
+Open `workshop_agent/agent.py`, change the `instruction` field, save, and rerun `adk web .`. The agent's tone and behaviour will shift immediately — the system prompt is the policy layer.
 
 ## Docker
 

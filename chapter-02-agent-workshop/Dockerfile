@@ -5,7 +5,7 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY stage-2-adk-agent ./stage-2-adk-agent
+COPY workshop_agent ./workshop_agent
 
 EXPOSE 8000
 
