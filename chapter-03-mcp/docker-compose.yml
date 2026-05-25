@@ -1,0 +1,12 @@
+services:
+  catalog:
+    build:
+      context: .
+      dockerfile: stage_2_http/Dockerfile
+    container_name: catalog-server
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+
+# Later chapters extend this file. Chapter 10 adds redis;
+# Chapter 11 adds langfuse; the catalog service stays the same.
