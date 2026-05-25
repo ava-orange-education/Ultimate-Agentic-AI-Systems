@@ -1,0 +1,8 @@
+services:
+  agent:
+    build: .
+    container_name: workshop-agent
+    env_file: .env
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
