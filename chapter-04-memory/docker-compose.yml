@@ -1,0 +1,38 @@
+services:
+  chromadb:
+    image: chromadb/chroma:0.5.0
+    container_name: chapter4-chromadb
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8000:8000"
+    environment:
+      ANONYMIZED_TELEMETRY: "FALSE"
+      IS_PERSISTENT: "TRUE"
+      PERSIST_DIRECTORY: "/chroma/chroma"
+    volumes:
+      - chromadb_data:/chroma/chroma
+
+  mem0:
+    image: mem0/mem0-api-server:latest
+    container_name: chapter4-mem0
+    restart: unless-stopped
+    depends_on:
+      - chromadb
+    ports:
+      - "127.0.0.1:8888:8888"   # REST API
+      - "127.0.0.1:3000:3000"   # Dashboard
+    environment:
+      GOOGLE_API_KEY: ${GEMINI_API_KEY}
+      JWT_SECRET: ${MEM0_JWT_SECRET}
+      MEM0_DEFAULT_LLM_MODEL: gemini-2.5-flash
+      MEM0_DEFAULT_EMBEDDER_PROVIDER: huggingface
+      MEM0_DEFAULT_EMBEDDER_MODEL: sentence-transformers/all-MiniLM-L6-v2
+      MEM0_VECTOR_STORE_PROVIDER: chroma
+      MEM0_VECTOR_STORE_HOST: chromadb
+      MEM0_VECTOR_STORE_PORT: "8000"
+    volumes:
+      - mem0_data:/data
+
+volumes:
+  chromadb_data:
+  mem0_data:
