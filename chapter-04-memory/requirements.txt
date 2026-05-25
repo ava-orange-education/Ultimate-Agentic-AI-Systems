@@ -1,0 +1,8 @@
+mem0ai>=2.0.0
+mem0ai[nlp]>=2.0.0
+mem0ai[huggingface]>=2.0.0
+google-adk>=1.32.0
+google-genai>=1.0.0
+python-dotenv>=1.0.0
+chromadb>=0.4.24
+sentence-transformers>=2.7.0
