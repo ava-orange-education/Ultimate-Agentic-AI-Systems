@@ -1,0 +1,33 @@
+services:
+  returns-agent:
+    build:
+      context: .
+      dockerfile: returns_service/Dockerfile
+    container_name: returns-agent
+    env_file: .env
+    environment:
+      RETURNS_PORT: "8080"
+      # The card must advertise the Compose service name, not localhost --
+      # shopping-agent resolves this URL from its own container.
+      RETURNS_PUBLIC_URL: "http://returns-agent:8080"
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+
+  shopping-agent:
+    build:
+      context: .
+      dockerfile: shopping_desk/Dockerfile
+    container_name: shopping-agent
+    env_file: .env
+    environment:
+      # Reach the returns agent by its Compose service name, not an IP.
+      RETURNS_URL: "http://returns-agent:8080"
+    ports:
+      - "8000:8000"
+    depends_on:
+      - returns-agent
+    restart: unless-stopped
+
+# Later chapters extend this file. Chapter 10 adds redis and Chapter 11
+# adds langfuse. The two agent services stay where they are.
