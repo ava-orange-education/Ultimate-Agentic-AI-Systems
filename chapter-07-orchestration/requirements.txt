@@ -1,0 +1,8 @@
+google-adk[a2a]>=2.2.0
+a2a-sdk[http-server]>=1.0.0
+python-dotenv
+
+# Stage 3 adds LangGraph and the A2A server helpers.
+langgraph>=1.0.0
+langchain-google-genai>=2.0.0
+uvicorn>=0.30.0
