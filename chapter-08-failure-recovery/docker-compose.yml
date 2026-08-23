@@ -1,0 +1,29 @@
+services:
+  redis:
+    image: redis:7-alpine
+    container_name: ch8-redis
+    ports:
+      - "6379:6379"
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      retries: 5
+    restart: unless-stopped
+
+  replay-worker:
+    build: .
+    container_name: ch8-replay-worker
+    env_file: .env
+    environment:
+      REDIS_URL: "redis://redis:6379/0"
+    depends_on:
+      redis:
+        condition: service_healthy
+    command: ["python", "stage_4_recovery/replay_worker.py"]
+    restart: unless-stopped
+
+volumes:
+  redis-data:
