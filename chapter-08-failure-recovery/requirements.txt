@@ -1,0 +1,6 @@
+# ADK 2.x, plus Redis for the breaker, the idempotency store and the
+# dead letter queue. Chapter 10 reuses the same Redis for the semantic
+# cache, so this is not a dependency you are adding twice.
+google-adk>=2.2.0
+redis>=5.0.0
+python-dotenv
