@@ -1,0 +1,11 @@
+# ADK 2.x, Mem0 from Chapter 4, and neo4j-graphrag with the extras we need
+# for local embeddings. Redis carries over from Chapter 8.
+google-adk>=2.2.0
+redis>=5.0.0
+mem0ai>=2.0.0
+mem0ai[nlp]
+neo4j>=5.28.0
+neo4j-graphrag>=1.18.0
+neo4j-graphrag[sentence-transformers]
+sentence-transformers
+python-dotenv
