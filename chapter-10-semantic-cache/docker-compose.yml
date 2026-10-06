@@ -1,0 +1,40 @@
+services:
+  redis:
+    # The Chapter 8 state store: breaker, idempotency, dead letter queue.
+    # noeviction is the default and exactly what we want: under memory
+    # pressure it refuses writes rather than silently dropping a record.
+    image: redis:8.10
+    container_name: ch10-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+  redis-cache:
+    # The semantic cache. Same image, different contract. It is allowed
+    # to forget, so it gets a memory cap and an LFU eviction policy.
+    image: redis:8.10
+    container_name: ch10-redis-cache
+    command: >
+      redis-server --maxmemory 256mb --maxmemory-policy allkeys-lfu
+      --save "" --appendonly no
+    ports:
+      - "6380:6379"
+
+  neo4j:
+    # Unchanged from Chapter 9.
+    image: neo4j:5.26-community
+    container_name: ch10-neo4j
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    environment:
+      NEO4J_AUTH: neo4j/agentic-ai-book
+      NEO4J_PLUGINS: '["apoc"]'
+      NEO4J_server_memory_heap_max__size: 2G
+    volumes:
+      - neo4j_data:/data
+
+volumes:
+  redis_data:
+  neo4j_data:

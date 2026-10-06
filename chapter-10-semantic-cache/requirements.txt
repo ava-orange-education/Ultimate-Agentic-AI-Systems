@@ -1,0 +1,14 @@
+# ADK and the Chapter 9 graph stack carry over. redis 6.x moved the
+# index definition helpers to redis.commands.search.index_definition,
+# which is the path the cache module imports from.
+# Upper bounds stop a future major release from changing behaviour
+# under the book's code without anyone noticing.
+google-adk>=2.2.0,<3
+redis>=6.2.0,<9
+numpy
+sentence-transformers>=3,<6
+neo4j>=5.28.0,<7
+neo4j-graphrag[sentence-transformers]>=1.18.0,<2
+python-dotenv
+# Only for the library section near the end of the chapter.
+redisvl>=0.27.0,<1
