@@ -1,0 +1,13 @@
+.env
+.venv
+venv/
+__pycache__/
+*.pyc
+.idea/
+.vscode/
+.adk/
+# sentence-transformers / Hugging Face model downloads, if cached locally
+.cache/
+# Local benchmark output, if you redirect it to a file
+benchmark/*.log
+benchmark/results*.json
